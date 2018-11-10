@@ -99,19 +99,11 @@ if( ballY > paddleTopEdgeY &&
 }
 
 function drawBricks(){
-    if(brickGrid[0]){
-        colorRect(BRICK_W*0,0, BRICK_W-2,BRICK_H, 'red');
+    for(var i=0;i<BRICK_COUNT;i++){
+        if(brickGrid[i]){
+            colorRect(BRICK_W*i,0, BRICK_W-2,BRICK_H, 'red');
+        }
     }
-    if(brickGrid[1]){
-        colorRect(BRICK_W*1,0, BRICK_W-2,BRICK_H, 'red');
-    }
-    if(brickGrid[2]){
-        colorRect(BRICK_W*2,0, BRICK_W-2,BRICK_H, 'red');
-    }
-    if(brickGrid[3]){
-        colorRect(BRICK_W*3,0, BRICK_W-2,BRICK_H, 'red');
-    }
-   
 }
 
 function drawAll(){
