@@ -4,6 +4,10 @@ var ballSpeedX = 5;
 var ballY = 75;
 var ballSpeedY = 7;
 
+const BRICK_W = 100;
+const BRICK_H = 50;
+const BRICK_COUNT = 4;
+
 
 const PADDLE_WIDTH = 100;
 const PADDLE_THICKNESS = 10;
@@ -92,7 +96,10 @@ if( ballY > paddleTopEdgeY &&
 }
 }
 
-
+function drawBricks(){
+    colorRect(0,0, BRICK_W,BRICK_H, 'red')
+    
+}
 
 function drawAll(){
 
@@ -100,6 +107,8 @@ function drawAll(){
     colorCircle(ballX,ballY, 10,'white') //круг
     colorRect(paddleX, canvas.height-PADDLE_DIST_FROM_EDGE,
     PADDLE_WIDTH,PADDLE_THICKNESS, 'white')
+
+    drawBricks();
 
     colorText(mouseX+","+mouseY,mouseX,mouseY,'yellow');
 
