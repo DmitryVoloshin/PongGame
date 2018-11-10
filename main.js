@@ -8,6 +8,8 @@ const BRICK_W = 100;
 const BRICK_H = 50;
 const BRICK_COUNT = 4;
 
+var brickGrid = [ true,false,true,true];
+
 
 const PADDLE_WIDTH = 100;
 const PADDLE_THICKNESS = 10;
@@ -97,8 +99,19 @@ if( ballY > paddleTopEdgeY &&
 }
 
 function drawBricks(){
-    colorRect(0,0, BRICK_W,BRICK_H, 'red')
-    
+    if(brickGrid[0]){
+        colorRect(BRICK_W*0,0, BRICK_W-2,BRICK_H, 'red');
+    }
+    if(brickGrid[1]){
+        colorRect(BRICK_W*1,0, BRICK_W-2,BRICK_H, 'red');
+    }
+    if(brickGrid[2]){
+        colorRect(BRICK_W*2,0, BRICK_W-2,BRICK_H, 'red');
+    }
+    if(brickGrid[3]){
+        colorRect(BRICK_W*3,0, BRICK_W-2,BRICK_H, 'red');
+    }
+   
 }
 
 function drawAll(){
