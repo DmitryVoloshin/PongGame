@@ -88,10 +88,10 @@ function ballMove(){
     if(ballX < 0){  // лево
         ballSpeedX *= -1;
     }
-    if(ballX > canvas.width){ // право
+    if(ballX > canvas.width && ballSpeedX > 0.0){ // право
      ballSpeedX *= -1;
     }
-    if(ballY < 0){   //верх
+    if(ballY < 0 && ballSpeedY < 0.0){   //верх
            ballSpeedY *= -1;
        }
     if(ballY > canvas.height){  // низ
