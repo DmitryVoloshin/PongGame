@@ -85,7 +85,7 @@ function ballMove(){
     ballX += ballSpeedX;
     ballY += ballSpeedY;
         
-    if(ballX < 0){  // лево
+    if(ballX < 0 && ballSpeedX <0.0){  // лево
         ballSpeedX *= -1;
     }
     if(ballX > canvas.width && ballSpeedX > 0.0){ // право
@@ -218,7 +218,7 @@ function drawAll(){
  function colorRect(topLeftX,topLeftY,boxWidth,boxHeight,fillColor){
 
     canvasContext.fillStyle = fillColor;
-    canvasContext.fillRect(topLeftX,topLeftY,boxWidth,boxHeight);
+    canvasContext.fillRect(topLeftX,topLeftY,boxWidth,boxHeight,'blue');
  }
 
  function colorCircle(centerX,centerY, radius, fillColor){
