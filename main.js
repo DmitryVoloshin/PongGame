@@ -4,13 +4,13 @@ var ballSpeedX = 5;
 var ballY = 75;
 var ballSpeedY = 7;
 
-const BRICK_W = 100;
-const BRICK_H = 50;
-const BRICK_COLS = 8;
-const BRICK_ROWS = 4;
+const BRICK_W = 80;
+const BRICK_H = 20;
+const BRICK_COLS = 10;
+const BRICK_ROWS = 14;
 const BRICK_GAP = 2;
 
-var brickGrid = new Array(BRICK_COLS);
+var brickGrid = new Array(BRICK_COLS * BRICK_ROWS);
 
 
 const PADDLE_WIDTH = 100;
@@ -35,7 +35,7 @@ function updateMousePos(evt){
 
 }
 function brickReset(){
-    for(var i=0;i<BRICK_COLS;i++){
+    for(var i=0;i<BRICK_COLS * BRICK_ROWS;i++){
         brickGrid[i] = true;
     }
 }
@@ -106,24 +106,27 @@ if( ballY > paddleTopEdgeY &&
 }
 }
 
+
+function rowColToArrayIndex(col, row){
+    return col + BRICK_COLS * row ;
+}
+
+
 function drawBricks(){
 
     for(var eachRow=0;eachRow<BRICK_ROWS;eachRow++){
     for(var eachCol=0;eachCol<BRICK_COLS;eachCol++){
-        if(brickGrid[eachCol]){
+
+          var arrayIndex = rowColToArrayIndex(eachCol,eachRow)
+
+
+        if(brickGrid[arrayIndex]){
             colorRect(BRICK_W*eachCol,BRICK_H*eachRow, 
                 BRICK_W-BRICK_GAP,
                 BRICK_H-BRICK_GAP, 'red');
         }
     }
     }
-
-    // for(var i=0;i<BRICK_COUNT;i++){
-    //     if(brickGrid[i]){
-    //         colorRect(BRICK_W*i,BRICK_H, BRICK_W-BRICK_GAP
-    //             ,BRICK_H-BRICK_GAP, 'red');
-    //     }
-    // }
 }
 
 function drawAll(){
@@ -131,14 +134,20 @@ function drawAll(){
     colorRect(0,0, canvas.width, canvas.height,'black'); //чистый экран
     colorCircle(ballX,ballY, 10,'white') //круг
     colorRect(paddleX, canvas.height-PADDLE_DIST_FROM_EDGE,
-    PADDLE_WIDTH,PADDLE_THICKNESS, 'white')
+    PADDLE_WIDTH,PADDLE_THICKNESS, 'white') //ловилка(белая пластина)
 
     drawBricks();
 
-    var mouseBrickCol = mouseX / BRICK_W;
-    var mouseBrickRow = mouseY / BRICK_H;
-    colorText(mouseBrickCol+","+mouseBrickRow,mouseX,mouseY,'yellow');
+    var mouseBrickCol = Math.floor(mouseX / BRICK_W);
+    var mouseBrickRow = Math.floor(mouseY / BRICK_H);
+    var brickIndexUnderMouse = rowColToArrayIndex(mouseBrickCol,mouseBrickRow);
+    colorText(mouseBrickCol+","+mouseBrickRow+":"+brickIndexUnderMouse,mouseX,mouseY,'yellow');
 
+    if(brickIndexUnderMouse >= 0 && 
+        brickIndexUnderMouse < BRICK_COLS * BRICK_ROWS){
+
+            brickGrid[brickIndexUnderMouse] = false;
+        }
  }
 
  function colorRect(topLeftX,topLeftY,boxWidth,boxHeight,fillColor){
